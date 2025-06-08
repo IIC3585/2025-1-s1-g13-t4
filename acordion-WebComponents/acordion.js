@@ -59,8 +59,8 @@ templateDropdown.innerHTML = `
     }
 
     .list.open {
-    max-height: 300px; 
-    pointer-events: auto;
+        max-height: 300px; 
+        pointer-events: auto;
     
         border-bottom: 3px solid #333;
         border-left: 3px solid #333;
