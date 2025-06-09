@@ -1,0 +1,132 @@
+<!-- suscripcion-WebComponents/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Planes de Suscripción – Web Components</title>
+  <script type="module" src="./suscripcion-element.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .navbar {
+      background: #2c73d2;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .cards-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>DCCreditCard</h1>
+    <div class="cart">🛒</div>
+  </div>
+
+  <div class="cards-container">
+    <suscripcion-element>
+      <!-- Plan Básico -->
+      <article slot="plan" data-nombre="Básico">
+        <h3>Básico</h3>
+        <div class="visits">1.000 DCCredits iniciales</div>
+        <div class="precio">$500.000</div>
+        <div class="label-precio">Cupo máximo</div>
+        <div class="vat">$700 USD Cupo Internacional</div>
+        <div class="descripcion">
+          Ideal para quienes apenas se bajaron del burro financiero. No brilla, pero cumple.
+        </div>
+        <button>Lo Quiero!</button>
+        <ul class="features">
+          <li>Seguimiento diario de gastos</li>
+          <li>Resumen mensual (en Comic Sans)</li>
+          <li>Soporte por paloma mensajera</li>
+          <li>Acceso a panel básico con gráficos que casi no duelen</li>
+          <li>Integración con calculadora Casio</li>
+        </ul>
+      </article>
+
+      <!-- Plan Oro -->
+      <article slot="plan" data-nombre="Oro">
+        <h3>Oro</h3>
+        <div class="visits">2.000 DCCredits iniciales</div>
+        <div class="precio">$1.000.000</div>
+        <div class="label-precio">Cupo máximo</div>
+        <div class="vat">$1.400 USD Cupo Internacional</div>
+        <div class="descripcion">
+          Para quienes ya dejaron la alcancía y quieren jugar en ligas mayores (pero no tanto).
+        </div>
+        <button>Lo Quiero!</button>
+        <ul class="features">
+          <li>Seguimiento diario de gastos</li>
+          <li>Resumen mensual (en Arial, qué lujo)</li>
+          <li>Soporte por email (respondemos en menos de 72 hs*)</li>
+          <li>Acceso a panel mejorado con colores llamativos</li>
+          <li>Integración con apps reales (Google/Facebook)</li>
+          <li>Dashboard de adquisición de clientes <span class="new">NEW</span></li>
+          <li>Soporte emocional opcional <span class="new">NEW</span></li>
+        </ul>
+      </article>
+
+      <!-- Plan Platino -->
+      <article slot="plan" data-nombre="Platino">
+        <h3>Platino</h3>
+        <div class="visits">5.000 DCCredits iniciales</div>
+        <div class="precio">$2.000.000</div>
+        <div class="label-precio">Cupo máximo</div>
+        <div class="vat">$3.000 USD Cupo Internacional</div>
+        <div class="descripcion">
+          Pensado para startups, emprendedores seriales y gente con más pestañas abiertas que tiempo libre.
+        </div>
+        <button>Lo Quiero!</button>
+        <ul class="features">
+          <li>Seguimiento diario de gastos premium</li>
+          <li>Resumen mensual en PDF (¡con portada!)</li>
+          <li>Soporte por chat, a veces con emojis</li>
+          <li>Integración con Instagram, Twitter y hasta tu tostadora</li>
+          <li>Dashboard de comportamiento financiero <span class="new">NEW</span></li>
+          <li>Permisos por usuario, porque confiar ciegamente es peligroso <span class="new">NEW</span></li>
+        </ul>
+      </article>
+
+      <!-- Plan Élite -->
+      <article slot="plan" data-nombre="Élite">
+        <h3>Élite</h3>
+        <div class="visits">10.000 DCCredits iniciales</div>
+        <div class="precio">$5.000.000</div>
+        <div class="label-precio">Cupo máximo</div>
+        <div class="vat">$5.000 USD Cupo Internacional</div>
+        <div class="descripcion">
+          Para quienes ya no saben si tienen una tarjeta o un trono. VIP, con luces LED imaginarias.
+        </div>
+        <button>Lo Quiero!</button>
+        <ul class="features">
+          <li>Seguimiento láser de tus gastos (no literal, pero suena cool)</li>
+          <li>Resumen mensual animado (opcionalmente con fuegos artificiales)</li>
+          <li>Soporte 24/7 (sí, incluso el 29 de febrero)</li>
+          <li>Dominio personalizado: tunombre.vip</li>
+          <li>Solución White Label que impresiona hasta a tu suegra</li>
+          <li>Snippets para Google, y para tu ego <span class="new">NEW</span></li>
+          <li>Dashboard de insights de equipo para dominar el mundo <span class="new">NEW</span></li>
+        </ul>
+      </article>
+    </suscripcion-element>
+  </div>
+</body>
+</html>
