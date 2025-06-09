@@ -24,7 +24,7 @@ class Acordion extends LitElement {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    overflow: hidden; /* Prevent overflow */
+    overflow: hidden;
     box-sizing: border-box;
   }
 

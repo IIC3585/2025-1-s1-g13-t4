@@ -1,20 +1,40 @@
 class AcordionGroup extends HTMLElement {
   constructor() {
     super();
-    this.handleToggle = this.handleToggle.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
   }
 
   connectedCallback() {
-    this.addEventListener('acordion-toggle', this.handleToggle);
+    window.addEventListener('acordion-opened', this.handleOpen);
+    if (this.hasAttribute('width')) {
+      this._propagateWidth(this.getAttribute('width'));
+    }
   }
 
-  handleToggle(event) {
-    const opened = event.detail.target;
+  disconnectedCallback() {
+    window.removeEventListener('acordion-opened', this.handleOpen);
+  }
 
-    this.querySelectorAll('acordion-element').forEach(acordion => {
-      if (acordion !== opened) {
-        acordion.close();
-      }
+  static get observedAttributes() {
+    return ['width'];
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    if (name === 'width') {
+      this._propagateWidth(newVal);
+    }
+  }
+
+  handleOpen(e) {
+    const opened = e.detail;
+    this.querySelectorAll('acordion-element').forEach(acc => {
+      if (acc !== opened) acc.open = false;
+    });
+  }
+
+  _propagateWidth(width) {
+    this.querySelectorAll('acordion-element').forEach(acc => {
+      acc.setAttribute('external-width', width);
     });
   }
 }
