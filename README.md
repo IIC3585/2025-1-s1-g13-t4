@@ -1,12 +1,33 @@
 ## Acordion
 
-### Use
-- Open a local server
-- Open index.html from the desired folder (`acordion-lit/` or `acordion-WebComponents/`)
+**Uso**  
+1. Inicia un servidor local.  
+2. Abre `index.html` en:
+   - `acordion-WebComponents/`  
+   - `acordion-lit/`
 
-### Customize
+**Personalización**  
+- Añade/borra `<acordion-element>` para secciones.  
+- Dentro de cada uno, usa slots `header` y `content`.  
+- Ajusta ancho con `<acordion-group width="50%">`.
 
-- Add/remove elements to/from the acordion (`<acordion-element>`)
-- Add/remove items to/from each acordion element (`<acordion-item>`) 
-- Change acordion width (`<acordion-group width=50%>`)
-- Works on mobile viewport too
+**Responsive**  
+Funciona en cualquier tamaño de pantalla (móvil y escritorio).
+
+---
+
+## Suscripción
+
+**Uso**  
+1. Inicia un servidor local.  
+2. Abre `index.html` en:
+   - `suscripcion-WebComponents/`  
+   - `suscripcion-lit/`
+
+**Personalización**  
+- Añade/borra `<article slot="plan">` para cada tarjeta.  
+- Define `data-nombre="Plan"` y usa clases `.visits`, `.precio`, `.label-precio`, `.vat`, `.descripcion`, `.features`.  
+- Cambia el color principal ajustando la variable CSS `--primary` en el componente.
+
+**Responsive**  
+Tarjetas adaptativas en cualquier ancho (móvil y escritorio).  
