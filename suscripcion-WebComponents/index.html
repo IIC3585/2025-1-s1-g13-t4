@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Planes de Suscripción – Web Components</title>
+    <script type="module" src="./pricing-card.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+      }
+      .navbar {
+        background: #2c73d2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+      h1 { color: white; margin: 0; font-size: 1.5rem; }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>DCCreditCard</h1>
+      <div class="cart">🛒</div>
+    </div>
+
+    <div class="cards-container">
+      <pricing-card
+        title="Básico"
+        visits="1.000"
+        price="$500.000"
+        vatPrice="$700"
+        description="Ideal para quienes apenas se bajaron del burro financiero. No brilla, pero cumple."
+        features='[
+          { "text": "Seguimiento diario de gastos" },
+          { "text": "Resumen mensual (en Comic Sans)" },
+          { "text": "Soporte por paloma mensajera" },
+          { "text": "Acceso a panel básico con gráficos que casi no duelen" },
+          { "text": "Integración con calculadora Casio" }
+        ]'>
+      </pricing-card>
+
+      <pricing-card
+        title="Oro"
+        visits="2.000"
+        price="$1.000.000"
+        vatPrice="$1.400"
+        description="Para quienes ya dejaron la alcancía y quieren jugar en ligas mayores (pero no tanto)."
+        features='[
+          { "text": "Seguimiento diario de gastos" },
+          { "text": "Resumen mensual (en Arial, qué lujo)" },
+          { "text": "Soporte por email (respondemos en menos de 72hs*)" },
+          { "text": "Acceso a panel mejorado con colores llamativos" },
+          { "text": "Integración con apps reales (Google/Facebook)" },
+          { "text": "Dashboard de adquisición de clientes", "isNew": true },
+          { "text": "Soporte emocional opcional", "isNew": true }
+        ]'>
+      </pricing-card>
+
+      <pricing-card
+        title="Platino"
+        visits="5.000"
+        price="$2.000.000"
+        vatPrice="$3.000"
+        description="Pensado para startups, emprendedores seriales y gente con más pestañas abiertas que tiempo libre."
+        features='[
+          { "text": "Seguimiento diario de gastos premium" },
+          { "text": "Resumen mensual en PDF (¡con portada!)" },
+          { "text": "Soporte por chat, a veces con emojis" },
+          { "text": "Integración con Instagram, Twitter y hasta tu tostadora" },
+          { "text": "Panel de control que te hace sentir hacker" },
+          { "text": "Dashboard de comportamiento financiero", "isNew": true },
+          { "text": "Permisos por usuario, porque confiar ciegamente es peligroso", "isNew": true }
+        ]'>
+      </pricing-card>
+
+      <pricing-card
+        title="Élite"
+        best
+        visits="10.000"
+        price="$5.000.000"
+        vatPrice="$5.000"
+        description="Para quienes ya no saben si tienen una tarjeta o un trono. VIP, con luces LED imaginarias."
+        features='[
+          { "text": "Seguimiento láser de tus gastos (no literal, pero suena cool)" },
+          { "text": "Resumen mensual animado (opcionalmente con fuegos artificiales)" },
+          { "text": "Soporte 24/7 (sí, incluso el 29 de febrero)" },
+          { "text": "Dominio personalizado: tunombre.vip" },
+          { "text": "Solución White Label que impresiona hasta a tu suegra" },
+          { "text": "Snippets para Google, y para tu ego", "isNew": true },
+          { "text": "Dashboard de insights de equipo para dominar el mundo", "isNew": true }
+        ]'>
+      </pricing-card>
+    </div>
+  </body>
+</html>
