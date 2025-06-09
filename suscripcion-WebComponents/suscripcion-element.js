@@ -1,160 +1,157 @@
+
 const template = document.createElement('template');
 template.innerHTML = `
   <style>
-    :host { display: block; font-family: sans-serif; }
-    .card {
-      position: relative;
-      background: #fff;
-      border: 1px solid #ddd;
+    :host {
+      --primary: #2c73d2;
+      --primary-dark: #1b4f9c;
+      --border: #ddd;
+      --bg: #fff;
+      --text-dark: #111;
+      --text-muted: #666;
+      display: block;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .planes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      align-items: stretch;
+    }
+    ::slotted([slot="plan"]) {
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      max-width: 280px;
       display: flex;
       flex-direction: column;
+      padding: 1.5rem;
+      height: 100%;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .card.best { border: 2px solid #2c73d2; }
-    .badge {
-      display: none;
+    ::slotted([slot="plan"]:hover) {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    }
+    /* Élite destacado */
+    ::slotted([slot="plan"][data-nombre="Élite"]) {
+      border: 2px solid var(--primary);
+    }
+    ::slotted([slot="plan"][data-nombre="Élite"])::before {
+      content: 'MÁS COTIZADO';
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: #2c73d2;
+      background: var(--primary);
       color: #fff;
-      font-size: .75rem;
-      font-weight: 600;
-      padding: .25rem .5rem;
+      padding: 0.3rem 0.6rem;
       border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
       text-transform: uppercase;
     }
-    .card.best .badge { display: block; }
-
-    .header { margin-bottom: .5rem; }
-    .title { font-size: 1.25rem; margin: 0; }
-    .visits { font-size: .875rem; color: #666; margin: .25rem 0; }
-
-    .price { font-size: 1.5rem; font-weight: bold; margin: .5rem 0; }
-    .vat { font-size: .875rem; color: #666; margin-bottom: .5rem; }
-
-    .description {
+    ::slotted([slot="plan"] h3) {
+      margin: 0 0 0.25rem;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+    }
+    ::slotted([slot="plan"] .visits) {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    /* precio grande y negrita */
+    ::slotted([slot="plan"] .precio) {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      margin: 0.25rem 0;
+    }
+    ::slotted([slot="plan"] .label-precio) {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    ::slotted([slot="plan"] .vat) {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    ::slotted([slot="plan"] .descripcion) {
       flex: 1;
-      font-size: .875rem;
+      font-size: 0.9rem;
       color: #444;
-      margin-bottom: .5rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
     }
-
-    .button {
-      background: #2c73d2;
+    /* botón azul full-width */
+    ::slotted([slot="plan"] button) {
+      background: var(--primary);
+      color: #fff;
       border: none;
-      color: white;
-      padding: .75rem;
       border-radius: 4px;
+      width: 100%;
+      padding: 0.75rem;
       font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
       cursor: pointer;
-      margin-bottom: .5rem;
+      margin: 1rem 0;
+      transition: background 0.2s ease;
     }
-    .button:hover { background: #245bb5; }
+    ::slotted([slot="plan"] button:hover) {
+      background: var(--primary-dark);
+    }
 
-    .features { list-style: none; padding: 0; margin: 0; }
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: .25rem;
-      font-size: .875rem;
+    ::slotted([slot="plan"] .features) {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-    .feature-item::before {
+    ::slotted([slot="plan"] .features li) {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+    ::slotted([slot="plan"] .features li)::before {
       content: '✔';
-      color: green;
-      margin-right: .5rem;
+      color: #28a745;
+      margin-right: 0.5rem;
       line-height: 1;
     }
-    .new {
+    ::slotted([slot="plan"] .features li .new) {
+      margin-left: 0.5rem;
       background: #28a745;
       color: #fff;
-      font-size: .625rem;
+      font-size: 0.625rem;
       border-radius: 4px;
-      padding: .1rem .3rem;
-      margin-left: .5rem;
+      padding: 0.1rem 0.4rem;
       text-transform: uppercase;
     }
   </style>
-
-  <div class="card">
-    <div class="badge">Más cotizado</div>
-    <div class="header">
-      <h3 class="title"></h3>
-      <div class="visits"></div>
-    </div>
-    <div class="price"></div>
-    <div class="vat"></div>
-    <p class="description"></p>
-    <button class="button">Lo Quiero!</button>
-    <ul class="features"></ul>
+  <div class="planes">
+    <slot name="plan"></slot>
   </div>
 `;
 
-class PricingCard extends HTMLElement {
+class SuscripcionElement extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true));
   }
-
-  static get observedAttributes() {
-    return ['title','visits','price','vatprice','description','features','best'];
-  }
-
-  attributeChangedCallback() {
-    this._render();
-  }
-
   connectedCallback() {
-    this._render();
-  }
-
-  _render() {
-    const root = this.shadowRoot;
-    // Título y visitas
-    root.querySelector('.title').textContent = this.getAttribute('title') || '';
-    root.querySelector('.visits').textContent =
-      (this.getAttribute('visits') || '') + ' DCCredits iniciales';
-
-    // Precio y cupo internacional
-    root.querySelector('.price').textContent =
-      (this.getAttribute('price') || '') + ' Cupo máximo';
-    root.querySelector('.vat').textContent =
-      (this.getAttribute('vatprice') || '') + ' USD Cupo Internacional';
-
-    // Descripción
-    root.querySelector('.description').textContent =
-      this.getAttribute('description') || '';
-
-    // Lista de features
-    const ul = root.querySelector('.features');
-    ul.innerHTML = '';
-    let features = [];
-    try {
-      features = JSON.parse(this.getAttribute('features') || '[]');
-    } catch (e) {
-      console.error('Invalid JSON in features attribute', e);
-    }
-    features.forEach(item => {
-      const li = document.createElement('li');
-      li.className = 'feature-item';
-      li.textContent = item.text;
-      if (item.isNew) {
-        const span = document.createElement('span');
-        span.className = 'new';
-        span.textContent = 'New';
-        li.appendChild(span);
+    this.shadowRoot.addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') {
+        const planEl = e.target.closest('[slot="plan"]');
+        const nombre = planEl.getAttribute('data-nombre') || '';
+        alert('Usted ha elegido el plan ' + nombre);
       }
-      ul.appendChild(li);
     });
-
-    // “Más cotizado”
-    const isBest = this.hasAttribute('best');
-    root.querySelector('.card').classList.toggle('best', isBest);
   }
 }
 
-customElements.define('pricing-card', PricingCard);
+customElements.define('suscripcion-element', SuscripcionElement);
