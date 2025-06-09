@@ -3,6 +3,8 @@ import { LitElement, html, css } from 'https://unpkg.com/lit@2.8.0/index.js?modu
 class AcordionItem extends LitElement {
   static styles = css`
     :host {
+    
+    
       display: block;
       padding: 8px;
       cursor: pointer;
