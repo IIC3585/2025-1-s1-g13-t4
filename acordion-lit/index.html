@@ -3,17 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <title>Web Components Demo</title>
+  <script type="module" src="./acordion-group-lit.js"></script>
   <script type="module" src="./acordion-lit.js"></script>
   <script type="module" src="./acordion-item-lit.js"></script>
 </head>
-<body>
+<body style="font-family: Arial, sans-serif; padding: 20px; background-color: blue;">
   <h1>Web Components</h1>
-    <acordion-element>
-        <acordion-item>Opción 1</acordion-item>
-        <acordion-item>Opción 2</acordion-item>
-        <acordion-item>Opción 3</acordion-item>
-        <acordion-item>Opción 4</acordion-item>
-    </acordion-element>
+    <acordion-group>
+        <acordion-element label="Novak Djokovic">
+            <acordion-item>
+              Novak Djokovic (Serbian: Новак Ђоковић / Novak Đoković; born 22 May 1987) is a Serbian professional tennis player. He has been ranked as the world No. 1 in men's singles by the Association of Tennis Professionals (ATP) for a record 428 weeks across a record 13 different years, and finished as the year-end No. 1 a record eight times. Djokovic has won a record 24 major men's singles titles, including a record ten Australian Open titles. 
+            </acordion-item>
+            <acordion-item>Two</acordion-item>
+        </acordion-element>
+        <acordion-element label="Roger Federer">
+            <acordion-item>Roger Federer (born 8 August 1981) is a Swiss former professional tennis player. He was ranked as the world No. 1 in men's singles by the Association of Tennis Professionals (ATP) for 310 weeks (second-most of all time), including a record 237 consecutive weeks, and finished as the year-end No. 1 five times. Federer won 103 singles titles on the ATP Tour, the second most since the start of the Open Era in 1968, including 20 major men's singles titles (among which a record eight men's singles Wimbledon titles, and an Open Era joint-record five men's singles US Open titles) and six year-end championships.</acordion-item>
+            <acordion-item>Four</acordion-item>
+        </acordion-element>
+        <acordion-element label="Rafael Nadal">
+            <acordion-item>Rafael Nadal Parera (born 3 June 1986) is a Spanish former professional tennis player. He was ranked as the world No. 1 in men's singles by the Association of Tennis Professionals (ATP) for 209 weeks, and finished as the year-end No. 1 five times. Nadal won 92 ATP Tour-level singles titles, including 22 major titles (among which a record 14 French Open titles), as well as 36 Masters titles and an Olympic gold medal. Nadal is one of three men to complete the career Golden Slam in singles. His 81 consecutive wins on clay constitute the longest single-surface win streak in the Open Era.</acordion-item>
+            <acordion-item>Three</acordion-item>
+            <acordion-item>Four</acordion-item>
+        </acordion-element>
+    </acordion-group>
 
  
 </body>

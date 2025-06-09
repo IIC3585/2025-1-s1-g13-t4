@@ -2,84 +2,116 @@ import { LitElement, html, css } from 'https://unpkg.com/lit@2.8.0/index.js?modu
 
 class Acordion extends LitElement {
   static styles = css`
-    .dropdown {
-      position: relative;
+    :host {
+      --border-color: #333;
+      --background-selected: #f0f0f0;
+      --arrow-color: #333;
+      display: block;
       width: 400px;
+      margin-bottom: 10px;
+    }
+
+    .dropdown {
       border-radius: 6px;
+      user-select: none;
     }
 
     .selected {
       padding: 8px;
-      border: 3px solid #333;
+      border: 3px solid var(--border-color);
       border-radius: 6px;
-      background: #f0f0f0;
+      background: var(--background-selected);
       cursor: pointer;
-      user-select: none;
-      transition: border-radius 0.25s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-radius 0.3s ease;
     }
 
     .selected.open {
-      border-bottom: 0;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
 
     .list {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background: white;
-      border: 3px solid #333;
+      border: 3px solid var(--border-color);
       border-top: none;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-      z-index: 1000;
-
-      max-height: 0;
+      background: white;
       overflow: hidden;
+      max-height: 0;
       opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
       pointer-events: none;
-      transition: max-height 0.25s ease, opacity 0.25s ease;
     }
 
     .list.open {
-      max-height: 300px;
+      max-height: 500px;
       opacity: 1;
       pointer-events: auto;
     }
-      .dropdown, .selected, .list {
-        box-sizing: border-box;
+
+    ::slotted(acordion-item:not(:last-child)) {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .arrow {
+      border: solid var(--arrow-color);
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-left: 10px;
+      transform: rotate(45deg);
+      transition: transform 0.25s ease;
+    }
+    .arrow.open {
+      transform: rotate(-135deg);
     }
   `;
 
-static properties = {
+  static properties = {
     open: { type: Boolean },
-    selectedText: { type: String }
+    selectedText: { type: String },
   };
 
   constructor() {
     super();
     this.open = false;
-    this.selectedText = 'Select...';
+    this.selectedText = this.getAttribute('label') || 'Select...';
   }
 
-  toggle() {
-    this.open = !this.open;
-  }
-
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     this.addEventListener('item-selected', (e) => {
       this.selectedText = e.detail.text;
       this.open = false;
     });
   }
 
+  toggle() {
+    this.open = !this.open;
+    this.dispatchEvent(new CustomEvent('acordion-toggle', {
+      bubbles: true,
+      composed: true,
+      detail: { target: this },
+    }));
+  }
+
   render() {
     return html`
       <div class="dropdown">
-        <div class="selected ${this.open ? 'open' : ''}" @click="${this.toggle}">
+        <div
+          class="selected ${this.open ? 'open' : ''}"
+          @click=${this.toggle}
+          tabindex="0"
+          role="button"
+          aria-expanded=${this.open ? 'true' : 'false'}
+        >
           ${this.selectedText}
+          <i class="arrow ${this.open ? 'open' : ''}"></i>
         </div>
         <div class="list ${this.open ? 'open' : ''}">
           <slot></slot>
